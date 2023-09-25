@@ -98,6 +98,7 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+
 # Uncomment if you have tasks that create the project's static files in wwwroot
 
 # Ignoring following files/folder only for master
@@ -108,7 +109,6 @@ wwwroot/vendor/**/*.dist.css
 !wwwroot/vendor/fonts/*.dist.css
 wwwroot/vendor/**/*.dist.js
 wwwroot/vendor/css
-
 
 
 # Visual Studio 2017 auto generated files

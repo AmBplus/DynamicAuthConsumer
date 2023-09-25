@@ -88,9 +88,7 @@
     el.className = 'marker';
     el.insertAdjacentHTML(
       'afterbegin',
-      '<img src="' +
-        assetsPath +
-        'img/illustrations/fleet-car.png" alt="Fleet Car" width="20" class="rounded-3" id="carFleet-' +
+      '<img src="/img/illustrations/fleet-car.png" alt="Fleet Car" width="20" class="rounded-3" id="carFleet-' +
         marker.properties.message +
         '">'
     );
