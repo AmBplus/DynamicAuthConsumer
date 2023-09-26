@@ -12,15 +12,134 @@
       <li class='menu-item@(currentPage == "/Index" ? " active" : "")'>
         <a asp-page="/Index" class="menu-link">
           <i class="menu-icon tf-icons ti ti-smart-home"></i>
-          <div data-i18n="Home">Home</div>
+          <div data-i18n="Home">صفحه اصلی</div>
         </a>
       </li>
-      <li class='menu-item@(currentPage == "/Page2" ? " active" : "")'>
-        <a asp-page="/Page2" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-app-window"></i>
-          <div data-i18n="Page2">Page2</div>
-        </a>
-      </li>
+            <li class='menu-item@(currentPage.StartsWith("/Apps/Users/") ? " active" : "")'>
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div data-i18n="Users">Users</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class='menu-item@(currentPage == "/Apps/Users/List" ? " active" : "")'>
+                        <a asp-page="/Apps/Users/List" class="menu-link">
+                            <div data-i18n="List">List</div>
+                        </a>
+                    </li>
+                    <li class='menu-item@(currentPage.StartsWith("/Apps/Users/View/") ? " active" : "")'>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <div data-i18n="View">View</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class='menu-item@(currentPage == "/Apps/Users/View/Account" ? " active" : "")'>
+                                <a asp-page="/Apps/Users/View/Account" class="menu-link">
+                                    <div data-i18n="Account">Account</div>
+                                </a>
+                            </li>
+                            <li class='menu-item@(currentPage == "/Apps/Users/View/Security" ? " active" : "")'>
+                                <a asp-page="/Apps/Users/View/Security" class="menu-link">
+                                    <div data-i18n="Security">Security</div>
+                                </a>
+                            </li>
+    
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class='menu-item@(currentPage.StartsWith("/Apps/Access/") ? " active" : "")'>
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-settings"></i>
+                    <div data-i18n="Roles & Permissions">Roles & Permission</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class='menu-item@(currentPage == "/Apps/Access/Roles" ? " active" : "")'>
+                        <a asp-page="/Apps/Access/Roles" class="menu-link">
+                            <div data-i18n="Roles">Roles</div>
+                        </a>
+                    </li>
+                    <li class='menu-item@(currentPage == "/Apps/Access/Permission" ? " active" : "")'>
+                        <a asp-page="/Apps/Access/Permission" class="menu-link">
+                            <div data-i18n="Permission">Permission</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Pages -->
+            <li class='menu-item@((currentPage.StartsWith("/Pages/") || currentPage.StartsWith("/Wizards/") || currentPage.StartsWith("/Auth/") || currentPage.StartsWith("/Modals/")) ? " active" : "")'>
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-file"></i>
+
+                    <div data-i18n="Pages">صفحات</div>
+                </a>
+
+                    </li>
+                    <li class='menu-item@(currentPage.StartsWith("/Pages/Profile") ? " active" : "")'>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons ti ti-user-circle"></i>
+                            <div data-i18n="User Profile">پروفایل کاربر</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class='menu-item@(currentPage == "/Pages/Profile/User" ? " active" : "")'>
+                                <a asp-page="/Pages/Profile/User" class="menu-link">
+                                    <div data-i18n="Profile">پروفایل</div>
+                                </a>
+                            </li>
+                           
+                       </ul>
+                    </li>
+                    <li class='menu-item@(currentPage.StartsWith("/Pages/AccountSettings") ? " active" : "")'>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons ti ti-settings"></i>
+                            <div data-i18n="Account Settings">تنظیمات اکانت</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class='menu-item@(currentPage == "/Pages/AccountSettings/Account" ? " active" : "")'>
+                                <a asp-page="/Pages/AccountSettings/Account" class="menu-link">
+                                    <div data-i18n="Account">اکانت</div>
+                                </a>
+                            </li>
+                     </ul>
+                    </li>
+             
+          
+                    <li class='menu-item@(currentPage.StartsWith("/Auth/") ? " active" : "")'>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons ti ti-lock"></i>
+                            <div data-i18n="Authentications">احراز هویت</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class='menu-item@(currentPage.StartsWith("/Auth/Login") ? " active" : "")'>
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div data-i18n="Login">ورود</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class='menu-item@(currentPage == "/Auth/Login/Basic" ? " active" : "")'>
+                                        <a asp-page="/Auth/Login/Basic" class="menu-link" target="_blank">
+                                            <div data-i18n="Basic">Basic</div>
+                                        </a>
+                                    </li>
+                           
+                                </ul>
+                            </li>
+                            <li class='menu-item@(currentPage.StartsWith("/Auth/Register") ? " active" : "")'>
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div data-i18n="Register">ثبت نام</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class='menu-item@(currentPage == "/Auth/Register/Basic" ? " active" : "")'>
+                                        <a asp-page="/Auth/Register/Basic" class="menu-link" target="_blank">
+                                            <div data-i18n="Basic">Basic</div>
+                                        </a>
+                                    </li>
+                    
+                                </ul>
+                            </li>
+                     </ul>
+                    </li>
+    
+                </ul>
+            </li>
+
     </ul>
   </div>
 </aside>
