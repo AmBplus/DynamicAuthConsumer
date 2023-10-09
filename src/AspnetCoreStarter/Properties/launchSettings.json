@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7091;http://localhost:5216"
+      "applicationUrl": "https://localhost:7600;http://localhost:7601"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -18,10 +18,10 @@
     "WSL": {
       "commandName": "WSL2",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7091",
+      "launchUrl": "https://localhost:7600",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7091;http://localhost:5216"
+        "ASPNETCORE_URLS": "https://localhost:7600;http://localhost:7601"
       },
       "distributionName": ""
     }

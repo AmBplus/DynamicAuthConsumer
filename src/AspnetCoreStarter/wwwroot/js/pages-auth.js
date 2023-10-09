@@ -7,74 +7,151 @@ const formAuthentication = document.querySelector('#formAuthentication');
 
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
+    // Add submit handler
+    formAuthentication.addEventListener('submit', function (e) {
+
+      e.preventDefault();
+
+      // Validate form
+      fv.validate().then(function (status) {
+        if (status == 'Valid') {
+
+          // Show loading popup
+          Swal.fire({
+            title: 'Sending...',
+            allowOutsideClick: false
+          });
+
+          // AJAX request
+          fetch('/dummy-url', {
+            method: 'POST',
+            body: new FormData(formAuthentication)
+          })
+            .then(response => response.json())
+            .then(data => {
+
+              // Hide loading popup
+              Swal.close();
+
+              if (data.error) {
+                // Show error popup
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: data.message
+                });
+              } else {
+                // Show success popup
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success!',
+                  text: data.message
+                });
+              }
+
+            });
+
+        }
+      });
+
+    });
+
     // Form validation for Add new record
     if (formAuthentication) {
       const fv = FormValidation.formValidation(formAuthentication, {
         fields: {
+
           username: {
             validators: {
               notEmpty: {
-                message: 'Please enter username'
+                message: 'لطفا نام کاربری را وارد نمایید'
               },
               stringLength: {
                 min: 6,
-                message: 'Username must be more than 6 characters'
+                message: 'نام کاربری بیشتر از 6 حرف می باشد'
               }
             }
           },
+          name: {
+            validators: {
+              notEmpty: {
+                message: 'لطفا نام  را وارد نمایید'
+              },
+              stringLength: {
+                min: 2,
+                message: 'نام  بیشتر از 2 حرف می باشد'
+              }
+            }
+          },
+          lastname: {
+            validators: {
+              notEmpty: {
+                message: 'لطفا نام خانوادگی را وارد نمایید'
+              },
+              stringLength: {
+                min: 2,
+                message: 'نام خانوادگی  بیشتر از 2 حرف می باشد'
+              }
+            }
+          },
+
           email: {
             validators: {
               notEmpty: {
-                message: 'Please enter your email'
+                message: 'لطفا ایمیل را وارد نمایید'
               },
               emailAddress: {
-                message: 'Please enter valid email address'
+                message: 'لطفا ایمیل معتبر وارد نمایید'
+              },
+              stringLength: {
+                min: 6,
+                message: ' ایمیل بیشتر از 6 حرف می باشد'
               }
             }
           },
           'email-username': {
             validators: {
               notEmpty: {
-                message: 'Please enter email / username'
+                message: 'نام کاربری یا ایمیل را وارد نمایید'
               },
               stringLength: {
                 min: 6,
-                message: 'Username must be more than 6 characters'
+                message: 'نام کاربری یا ایمیل بیشتر از 6 حرف می باشد'
               }
             }
           },
           password: {
             validators: {
               notEmpty: {
-                message: 'Please enter your password'
+                message: 'لطفا رمز عبور را وارد نمایید'
               },
               stringLength: {
                 min: 6,
-                message: 'Password must be more than 6 characters'
+                message: 'رمز عبور باید بیشتر از 6 حرف باشد'
               }
             }
           },
           'confirm-password': {
             validators: {
               notEmpty: {
-                message: 'Please confirm password'
+                message: 'لطفا رمز عبور را تکرار کنید'
               },
               identical: {
                 compare: function () {
                   return formAuthentication.querySelector('[name="password"]').value;
                 },
-                message: 'The password and its confirm are not the same'
+                message: 'رمز عبور و تکرار رمز عبور یکسان نیست'
               },
               stringLength: {
                 min: 6,
-                message: 'Password must be more than 6 characters'
+                message: 'رمز عبور باید بیشتر از 6 حرف باشد'
               }
             }
           },
           terms: {
             validators: {
               notEmpty: {
-                message: 'Please agree terms & conditions'
+                message: 'لطفا قوانین را تایید فرمایید'
               }
             }
           }

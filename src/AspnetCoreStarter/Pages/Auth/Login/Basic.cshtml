@@ -1,0 +1,102 @@
+@page
+@model AspnetCoreFull.Pages.Auth.Login.BasicModel
+@{
+
+
+  Layout = "Layouts/_BlankLayout";
+  ViewData["Title"] = "صفحه ورود به سیستم";
+}
+
+@section VendorStyles {
+<link rel="stylesheet" href="~/vendor/libs/&#64;form-validation/umd/styles/index.min.css" />
+}
+
+@section VendorScripts {
+<script src="~/vendor/libs/&#64;form-validation/umd/bundle/popular.min.js"></script>
+<script src="~/vendor/libs/&#64;form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+<script src="~/vendor/libs/&#64;form-validation/umd/plugin-auto-focus/index.min.js"></script>
+}
+
+@section PageStyles {
+    <link href="~/vendor/libs/sweetalert2/sweetalert2.dist.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/vendor/css/pages/page-auth.dist.css">
+
+}
+
+@section PageScripts {
+    <script src="~/vendor/libs/sweetalert2/sweetalert2.dist.js"></script>
+    <script src="~/vendor/libs/sweetalert2/sweetalert2.js"></script>
+<script src="~/js/pages-auth.dist.js"></script>
+}
+
+
+@* ************** محتوا ************** *@
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner py-4">
+            <!-- ورود --> <div class="card">
+                <div class="card-body">
+                    <!-- لوگو --> <div class="app-brand justify-content-center mb-4 mt-2"> <a href="/" class="app-brand-link gap-2"> <span class="app-brand-logo demo">@await Html.PartialAsync("../_Partials/_Macros")</span> <span class="app-brand-text demo text-body fw-bold ms-1">@TempData.Peek("appName")</span> </a> </div> <!-- /لوگو --> <h4 class="mb-1 pt-2">به @TempData.Peek("appName") خوش آمدید! 👋</h4> <p class="mb-4">لطفا با حساب کاربری خود وارد شوید</p>
+
+              
+                    <form id="formAuthentication" class="mb-3" method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">ایمیل یا نام کاربری</label>
+                            <input type="text" class="form-control" id="email" name="email-username" placeholder="ایمیل یا نام کاربری خود را وارد کنید" autofocus>
+                        </div>
+                        <div class="mb-3 form-password-toggle">
+                            <div class="d-flex justify-content-between">
+                                <label class="form-label" for="password">رمز عبور</label>
+                          @*      <a href="/Auth/ForgotPassword/Basic">
+                                    <small>رمز عبور را فراموش کرده اید؟</small>
+                                </a>*@
+                            </div>
+                            <div class="input-group input-group-merge">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remember-me">
+                                <label class="form-check-label" for="remember-me">
+                                    مرا به خاطر بسپار
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-grid w-100" type="submit">ورود</button>
+                        </div>
+                    </form>
+
+                    <p class="text-center">
+                        <span>کاربر جدید هستید؟</span>
+                        <a href="/Auth/Register/Basic">
+                            <span>حساب کاربری بسازید</span>
+                        </a>
+                    </p>
+
+                    <div class="divider my-4">
+                        <div class="divider-text">یا</div>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
+                            <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
+                        </a>
+
+                        <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
+                            <i class="tf-icons fa-brands fa-google fs-5"></i>
+                        </a>
+
+                        <a href="javascript:;" class="btn btn-icon btn-label-twitter">
+                            <i class="tf-icons fa-brands fa-twitter fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /ثبت نام -->
+        </div>
+
+    </div>
+</div>
