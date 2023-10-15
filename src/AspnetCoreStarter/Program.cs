@@ -1,5 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
+using AspnetCoreStarter.CustomMiddlewares;
 
+var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy(name: MyAllowSpecificOrigins,
+  builder =>
+  {
+    builder.AllowAnyOrigin();
+    builder.AllowAnyHeader();
+    builder.AllowAnyMethod();
+
+  });
+
+});
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Add services to the container.
@@ -19,9 +33,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+//app.UseSetDomainMiddleware("https://localhost:5001");
 app.Run();

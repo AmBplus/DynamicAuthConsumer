@@ -3,61 +3,86 @@
  */
 
 'use strict';
-const formAuthentication = document.querySelector('#formAuthentication');
+
 
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
-    // Add submit handler
-    formAuthentication.addEventListener('submit', function (e) {
+    const formAuthentication = document.querySelector('#formAuthentication');
+    var domainKey = 'dabr';
+    console.log('---------------------------------------------------------------')
+    var apiDomain = localStorage.getItem(domainKey)
+    console.log('----------------------------------------------------------------')
+    console.log(apiDomain)
+    // Form validation for Add new record
+    if (formAuthentication) {
+      // Add submit handler
+      formAuthentication.addEventListener('submit', function (e) {
 
-      e.preventDefault();
+        e.preventDefault();
 
-      // Validate form
-      fv.validate().then(function (status) {
-        if (status == 'Valid') {
+        // Validate form
+        fv.validate().then(function (status) {
+          if (status == 'Valid') {
 
-          // Show loading popup
-          Swal.fire({
-            title: 'Sending...',
-            allowOutsideClick: false
-          });
-
-          // AJAX request
-          fetch('/dummy-url', {
-            method: 'POST',
-            body: new FormData(formAuthentication)
-          })
-            .then(response => response.json())
-            .then(data => {
-
-              // Hide loading popup
-              Swal.close();
-
-              if (data.error) {
-                // Show error popup
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: data.message
-                });
-              } else {
-                // Show success popup
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Success!',
-                  text: data.message
-                });
-              }
+            // Show loading popup
+            Swal.fire({
+              title: 'صبور باشید',
+              allowOutsideClick: false,
 
             });
 
-        }
+
+            // AJAX request
+            fetch(`${apiDomain}/api/Authenticate/login`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                Username: $('#username').val(),
+         
+                Password: $('#password').val()
+              })
+            })
+              .then(response => response.json())
+              .then(data => {
+
+                // Hide loading popup
+                Swal.close();
+                console.log('end ------------')
+                console.log(data.isSuccess)
+                if (data.isSuccess === false ) {
+                  // Show error popup
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'خطا',
+                    text: data.message
+                  });
+                } else {
+                  // Show success popup
+                  console.log('start ...........')
+                  if (localStorage.getItem('diam') !== null)
+                    localStorage.removeItem('diam')
+
+                  localStorage.setItem('diam', JSON.stringify(data.data));
+                  console.log(data)
+               
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'عملیات موفقیت آمیز بود',
+                    text: data.message
+                  });
+                }
+                window.location.replace(window.location.hostname);
+              
+              });
+
+
+          }
+        });
+
       });
 
-    });
-
-    // Form validation for Add new record
-    if (formAuthentication) {
       const fv = FormValidation.formValidation(formAuthentication, {
         fields: {
 
@@ -80,6 +105,20 @@ document.addEventListener('DOMContentLoaded', function (e) {
               stringLength: {
                 min: 2,
                 message: 'نام  بیشتر از 2 حرف می باشد'
+
+              }
+
+            }
+          },
+          phonenumber: {
+            validators: {
+              notEmpty: {
+                message: 'لطفا شماره تلفن  را وارد نمایید'
+              },
+              stringLength: {
+                min: 11,
+                max: 11,
+                message: 'شماره تلفن  بیشتر از 11 حرف می باشد'
               }
             }
           },
@@ -162,9 +201,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
             eleValidClass: '',
             rowSelector: '.mb-3'
           }),
-          submitButton: new FormValidation.plugins.SubmitButton(),
+          // submitButton: new FormValidation.plugins.SubmitButton(),
 
-          defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+          // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
           autoFocus: new FormValidation.plugins.AutoFocus()
         },
         init: instance => {

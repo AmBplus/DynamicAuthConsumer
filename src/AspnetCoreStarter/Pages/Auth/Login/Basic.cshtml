@@ -12,6 +12,7 @@
 }
 
 @section VendorScripts {
+    <script src="~/js/set-domain.js"></script>
 <script src="~/vendor/libs/&#64;form-validation/umd/bundle/popular.min.js"></script>
 <script src="~/vendor/libs/&#64;form-validation/umd/plugin-bootstrap5/index.min.js"></script>
 <script src="~/vendor/libs/&#64;form-validation/umd/plugin-auto-focus/index.min.js"></script>
@@ -24,9 +25,9 @@
 }
 
 @section PageScripts {
-    <script src="~/vendor/libs/sweetalert2/sweetalert2.dist.js"></script>
-    <script src="~/vendor/libs/sweetalert2/sweetalert2.js"></script>
-<script src="~/js/pages-auth.dist.js"></script>
+<script src="~/vendor/libs/sweetalert2/sweetalert2.dist.js"></script>
+<script src="~/vendor/libs/sweetalert2/sweetalert2.js"></script>
+<script src="~/js/pages-auth.js"></script>
 }
 
 
@@ -41,8 +42,8 @@
               
                     <form id="formAuthentication" class="mb-3" method="POST">
                         <div class="mb-3">
-                            <label for="email" class="form-label">ایمیل یا نام کاربری</label>
-                            <input type="text" class="form-control" id="email" name="email-username" placeholder="ایمیل یا نام کاربری خود را وارد کنید" autofocus>
+                            <label for="username" class="form-label">ایمیل یا نام کاربری</label>
+                            <input type="text" class="form-control" id="username" name="email-username" placeholder="نام کاربری خود را وارد کنید" autofocus>
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
