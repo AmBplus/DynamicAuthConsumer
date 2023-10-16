@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     text: data.message
                   });
                 }
-                window.location.replace(window.location.hostname);
+                window.location = '/';
               
               });
 
