@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7600;http://localhost:7601"
+      "applicationUrl": "https://localhost:7700;http://localhost:7701"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -18,7 +18,7 @@
     "WSL": {
       "commandName": "WSL2",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7600",
+      "launchUrl": "https://localhost:7700",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_URLS": "https://localhost:7600;http://localhost:7601"

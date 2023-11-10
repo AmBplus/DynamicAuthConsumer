@@ -1,28 +1,45 @@
 @page
+
 @model             RolesModel
 @{
   ViewData["Title"] = "Roles - Apps";
+
+
 }
 
 @section VendorStyles {
-<link rel="stylesheet" href="~/vendor/libs/datatables-bs5/datatables.bootstrap5.dist.css">
-<link rel="stylesheet" href="~/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.dist.css">
+
+
 <link rel="stylesheet" href="~/vendor/libs/&#64;form-validation/umd/styles/index.min.css" />
+ 
+
+}
+
+@section PageStyles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 }
 
 @section VendorScripts {
-<script src="~/vendor/libs/datatables-bs5/datatables-bootstrap5.dist.js"></script>
+
 <script src="~/vendor/libs/&#64;form-validation/umd/bundle/popular.min.js"></script>
 <script src="~/vendor/libs/&#64;form-validation/umd/plugin-bootstrap5/index.min.js"></script>
 <script src="~/vendor/libs/&#64;form-validation/umd/plugin-auto-focus/index.min.js"></script>
+    
+   
 }
 
 @section PageScripts {
-@*<script src="~/js/app-access-roles.dist.js"></script>*@
-<script src="~/js/modal-add-role.dist.js"></script>
+    <script src="~/vendor/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="~/js/app-access-roles.dist.js"></script>
+   
+
+@*<script src="~/js/modal-add-role.dist.js"></script>*@
 }
 
-@* ************** Content ************** *@
+
+ ************** Content ************** 
 <h4 class="mb-4">نمایش نقش ها</h4>
 
 <p class="mb-4">جدول منو ها را می توانید از جدول زیر مشاهده بفرمایید</p>
@@ -33,7 +50,16 @@
     <!-- Role Table -->
     <div class="card">
       <div class="card-datatable table-responsive">
-        <table class="datatables-users table border-top">
+                <table id="myTable" name="myTable" class="display table table-striped hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                        </tr>
+                    </thead>
+                </table>
+
+   @*     <table class="datatables-users table border-top">
           <thead>
             <tr>
               <th></th>
@@ -45,13 +71,12 @@
             </tr>
           </thead>
         </table>
-      </div>
+    *@  </div>
     </div>
     <!--/ Role Table -->
   </div>
 </div>
 <!--/ Role cards -->
-
 
 <!-- Add Role Modal -->
 @await Html.PartialAsync("../_Partials/_Modals/ModalAddRole")
