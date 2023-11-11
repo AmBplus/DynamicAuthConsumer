@@ -45,7 +45,10 @@
   @await Html.PartialAsync("Layouts/Sections/_ScriptsIncludes" + ViewData["frontVar"])
   </head>
 
-  <body>
+<body>
+    
+    <partial name="Layouts/Sections/_DisplayToastMessages" />
+    <partial name="Layouts/Sections/_DisplayAlertMessages" />
     <!-- Layout Content -->
   @RenderBody()
     <!--/ Layout Content -->

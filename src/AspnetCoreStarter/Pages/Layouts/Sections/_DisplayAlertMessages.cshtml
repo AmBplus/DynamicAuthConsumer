@@ -1,0 +1,120 @@
+@inject Infrastructure.Settings.ApplicationSettings applicationSettings
+
+@{
+    /// Version 3.0
+
+    var toastSettings =
+        applicationSettings.ToastSettings;
+
+    int delayStep =
+        toastSettings.DelayStep;
+
+    int delay =
+        toastSettings.InitialDelay - delayStep;
+
+    // نکته مهم
+    // در همه شرایط کار نمی‌کند List استفاده از کلاس
+    var alertErrors =
+        TempData[key: Infrastructure.Messages.MessageType.AlertError.ToString()] as
+        System.Collections.Generic.IList<string>;
+
+    var alertWarnings =
+        TempData[key: Infrastructure.Messages.MessageType.AlertWarning.ToString()] as
+        System.Collections.Generic.IList<string>;
+
+    var alertSuccesses =
+        TempData[key: Infrastructure.Messages.MessageType.AlertSuccess.ToString()] as
+        System.Collections.Generic.IList<string>;
+
+    if ((alertErrors == null || alertErrors.Count == 0) &&
+        (alertWarnings == null || alertWarnings.Count == 0) &&
+        (alertSuccesses == null || alertSuccesses.Count == 0))
+    {
+        return;
+    }
+}
+<div class="position-fixed top-50 start-50 translate-middle " style="z-index: 1000;">
+
+    @if (alertErrors != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show text-right alert-message" role="alert">
+            <ul class="mb-0">
+                @foreach (var message in alertErrors)
+                {
+                    <li>@message</li>
+                }
+            </ul>
+        
+            <button type="button"
+                    class="btn-close btn-close-black me-2 m-auto"
+                    data-bs-dismiss="alert"
+                    aria-label="&times;"></button>
+        </div>
+    }
+
+    @if (alertWarnings != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show text-right alert-message" role="alert">
+       
+            <ul class="mb-0">
+                @foreach (var message in alertWarnings)
+                {
+                    <li>@message</li>
+                }
+            </ul>
+            <button type="button"
+                    class="btn-close btn-close-black me-2 m-auto"
+                    data-bs-dismiss="alert"
+                    aria-label="&times;"></button>
+      
+        </div>
+    }
+
+    @if (alertSuccesses != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-right alert-message" role="alert">
+  
+            <ul class="mb-0">
+                @foreach (var message in alertSuccesses)
+                {
+                    <li>@message</li>
+                }
+            </ul>
+            <button type="button"
+                    class="btn-close btn-close-black me-2 m-auto"
+                    data-bs-dismiss="alert"
+                    aria-label="&times;"></button>
+        </div>
+    }
+
+</div>
+
+<script>
+
+    window.addEventListener('load', (e) => {
+
+        function closeAlerts() {
+          console.log('start  set timeout for alert....')
+            // Clear any existing timeout
+            clearTimeout(window.alertTimeout);
+
+            // Set new timeout
+            window.alertTimeout = setTimeout(function () {
+
+                // Close alerts
+                document.querySelectorAll('.alert-message').forEach(function (alert) {
+                    var bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                });
+
+            }, 10000);
+            console.log('end set timeout for alert ...')
+        }
+
+        // Call it on page load
+        closeAlerts();
+
+    })
+
+
+</script>
